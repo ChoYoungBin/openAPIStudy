@@ -1,13 +1,13 @@
-package com.example.openapistudy;
+package com.multi.contactsapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OpenapistudyApplication {
+public class OpenAPIStudyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OpenapistudyApplication.class, args);
+		SpringApplication.run(OpenAPIStudyApplication.class, args);
 	}
 
 }
