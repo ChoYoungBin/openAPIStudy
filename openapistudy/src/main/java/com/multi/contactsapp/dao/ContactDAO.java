@@ -1,21 +1,18 @@
 package com.multi.contactsapp.dao;
 
 import com.multi.contactsapp.domain.Contact;
-import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static lombok.AccessLevel.PRIVATE;
-
-
 @Repository
-@RequiredArgsConstructor(access = PRIVATE)
 public class ContactDAO {
 
-    private final SqlSession sqlSession;
+    @Autowired
+    private SqlSession sqlSession;
 
     public List<Contact> getContactList() {
         return sqlSession.selectList("contact.selectall");

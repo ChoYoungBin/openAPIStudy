@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class Contact {
-
     private long no;
     private String name;
     private String tel;
