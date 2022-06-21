@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/contacts")
+@RequestMapping(value = "/app/contacts")
 public class ContactController {
 
     @Autowired

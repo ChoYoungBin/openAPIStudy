@@ -1,4 +1,4 @@
-package com.multi.contactsapp;
+package com.multi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
