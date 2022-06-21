@@ -3,10 +3,10 @@ package com.multi.contactsapp.springdatarest.controller;
 import com.multi.contactsapp.springdatarest.domain.Contact;
 import com.multi.contactsapp.springdatarest.repository.ContactRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,10 +17,9 @@ public class ContactController {
     private final ContactRepository repository;
 
     @GetMapping
-    public List<Contact> getContactAll() {
-        return repository.findAll(Sort.by(Sort.Direction.DESC,"no"));
+    public Page<Contact> getContactAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
-
     @GetMapping("{no}")
     public Optional<Contact> getContactOne(@PathVariable("no") long no) {
         return repository.findById(no);
