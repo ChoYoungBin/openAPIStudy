@@ -16,7 +16,6 @@ public class Contact {
     private String name;
     @JacksonXmlProperty(localName = "phone")
     private String tel;
-    @JsonIgnore
     private String address;
 
 }

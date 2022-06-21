@@ -1,5 +1,6 @@
-package com.multi.contactssvc;
+package com.multi.contactssvc.controller;
 
+import com.multi.contactsapp.util.ApiException;
 import com.multi.contactssvc.domain.Contact;
 import com.multi.contactssvc.domain.ContactList;
 import com.multi.contactssvc.domain.Result;
@@ -33,14 +34,26 @@ public class ContactRestController {
         return contactRestService.getContactOne(contact);
     }
 
-    @PutMapping
-    public Result updateContact(@RequestBody Contact contact) {
-        return contactRestService.updateContact(contact);
-    }
+    @PostMapping()
+    public Result insertContact(@RequestBody Contact contact) {
+        String name = contact.getName();
+        String tel = contact.getTel();
+        if (name == null || name.equals("") ||tel == null || tel.equals("")) {
+            throw new ApiException("이름과 전화번호는 필수 입력 항목입니다.", "102");
+        }
 
-    @PostMapping
-    public Result insertContact(@RequestBody Contact c) {
-        return contactRestService.insertContact(c);
+        return contactRestService.insertContact(contact);
+    }
+    @PutMapping("{no}")
+    public Result updateContact(@PathVariable("no") int no, @RequestBody Contact contact) {
+        String name = contact.getName();
+        String tel = contact.getTel();
+        if (name == null || name.equals("") ||tel == null || tel.equals("")) {
+            throw new ApiException("이름과 전화번호는 필수 입력 항목입니다.", "102");
+        }
+        contact.setNo(no);
+
+        return contactRestService.updateContact(contact);
     }
 
     @DeleteMapping("{no}")

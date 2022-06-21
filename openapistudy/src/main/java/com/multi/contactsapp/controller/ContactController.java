@@ -1,4 +1,4 @@
-package com.multi.contactsapp;
+package com.multi.contactsapp.controller;
 
 import com.multi.contactsapp.domain.Contact;
 import com.multi.contactsapp.service.ContactService;
