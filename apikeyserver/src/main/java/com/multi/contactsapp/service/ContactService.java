@@ -12,66 +12,66 @@ import com.multi.contactsapp.domain.Result;
 
 @Service
 public class ContactService {
-	@Autowired
-	private ContactDAO contactDAO;
-	
-	public ContactList getContactList() {
-		List<Contact> contacts = contactDAO.getContactList();
-		ContactList contactList = new ContactList(0, 0, contacts.size(), contacts);
-		return contactList;
-	}
-	
-	public ContactList getContactList(int pageNo, int pageSize) {
-		List<Contact> contacts = contactDAO.getContactList(pageNo, pageSize);
-		int totalCount = contactDAO.getContactCount();		
-		ContactList contactList = new ContactList(pageNo, pageSize, totalCount, contacts);
-		return contactList;	
-	}
-	
-	public Contact getContactOne(Contact c) {
-		return contactDAO.getContactOne(c);
-	}
-	
-	public Result insertContact(Contact c) {
-		Result result = new Result("ok", "", "");
-		try {
-			int no = contactDAO.insertContact(c);
-			result.setMessage("¿¬¶ôÃ³ Ãß°¡ ¼º°ø. Ãß°¡µÈ ¿¬¶ôÃ³ÀÇ ÀÏ·Ã¹øÈ£ :" + no);
-			result.setKey(""+no);
-		} catch (Exception ex) {
-			result.setStatus("fail");
-			result.setMessage(ex.getMessage());
-			result.setKey("");
-		}
-		return result;
-	}
-	
-	public Result updateContact(Contact c) {
-		Result result = new Result("ok", "", "");
-		try {
-			int count = contactDAO.updateContact(c);
-			result.setMessage(count + "°ÇÀÇ ¿¬¶ôÃ³ º¯°æ ¼º°ø");
-			result.setKey(c.getNo()+"");
-		} catch (Exception ex) {
-			result.setStatus("fail");
-			result.setMessage(ex.getMessage());
-			result.setKey("");
-		}
-		return result;
-	}
-	
-	public Result deleteContact(Contact c) {
-		Result result = new Result("ok", "", "");
-		try {
-			int count = contactDAO.deleteContact(c);
-			result.setMessage(count + "°ÇÀÇ ¿¬¶ôÃ³ »èÁ¦ ¼º°ø");
-			result.setKey(c.getNo()+"");
-		} catch (Exception ex) {
-			result.setStatus("fail");
-			result.setMessage(ex.getMessage());
-			result.setKey("");
-		}
-		return result;
-	}
+    @Autowired
+    private ContactDAO contactDAO;
+
+    public ContactList getContactList() {
+        List<Contact> contacts = contactDAO.getContactList();
+        ContactList contactList = new ContactList(0, 0, contacts.size(), contacts);
+        return contactList;
+    }
+
+    public ContactList getContactList(int pageNo, int pageSize) {
+        List<Contact> contacts = contactDAO.getContactList(pageNo, pageSize);
+        int totalCount = contactDAO.getContactCount();
+        ContactList contactList = new ContactList(pageNo, pageSize, totalCount, contacts);
+        return contactList;
+    }
+
+    public Contact getContactOne(Contact c) {
+        return contactDAO.getContactOne(c);
+    }
+
+    public Result insertContact(Contact c) {
+        Result result = new Result("ok", "", "");
+        try {
+            int no = contactDAO.insertContact(c);
+            result.setMessage("ì—°ë½ì²˜ ì¶”ê°€ ì„±ê³µ. ì¶”ê°€ëœ ì—°ë½ì²˜ì˜ ì¼ë ¨ë²ˆí˜¸ :" + no);
+            result.setKey(""+no);
+        } catch (Exception ex) {
+            result.setStatus("fail");
+            result.setMessage(ex.getMessage());
+            result.setKey("");
+        }
+        return result;
+    }
+
+    public Result updateContact(Contact c) {
+        Result result = new Result("ok", "", "");
+        try {
+            int count = contactDAO.updateContact(c);
+            result.setMessage(count + "ê±´ì˜ ì—°ë½ì²˜ ë³€ê²½ ì„±ê³µ");
+            result.setKey(c.getNo()+"");
+        } catch (Exception ex) {
+            result.setStatus("fail");
+            result.setMessage(ex.getMessage());
+            result.setKey("");
+        }
+        return result;
+    }
+
+    public Result deleteContact(Contact c) {
+        Result result = new Result("ok", "", "");
+        try {
+            int count = contactDAO.deleteContact(c);
+            result.setMessage(count + "ê±´ì˜ ì—°ë½ì²˜ ì‚­ì œ ì„±ê³µ");
+            result.setKey(c.getNo()+"");
+        } catch (Exception ex) {
+            result.setStatus("fail");
+            result.setMessage(ex.getMessage());
+            result.setKey("");
+        }
+        return result;
+    }
 }
 
