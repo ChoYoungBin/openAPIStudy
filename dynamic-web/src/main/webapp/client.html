@@ -9,7 +9,7 @@ $(function() {
 	$("#getContacts").click(function() {
 		var param = { key : "08f82070986d5541e24a211e2aa30a89" };
 		$("#list").empty();
-		$.get("http://tfactory.com:8080/contacts", param)
+		$.get("http://localhost:8080/contacts", param)
 		.done(function(data) {
 			if (data.contacts != null) {
 				var str = "";
