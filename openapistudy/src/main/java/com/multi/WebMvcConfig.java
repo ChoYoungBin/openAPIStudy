@@ -2,10 +2,7 @@ package com.multi;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 import java.time.Duration;
 
@@ -31,4 +28,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .setCachePeriod(86400);
     }
 
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry
+                .addMapping("/contacts/**")
+                .allowedOrigins("http://client:8000", "http://jcornor.com:8000")
+                .allowedMethods("GET", "PUT", "POST", "DELETE", "OPTIONS", "HEAD")
+                .allowCredentials(true)
+                .maxAge(3600);
+    }
 }
