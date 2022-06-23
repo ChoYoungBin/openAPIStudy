@@ -27,7 +27,29 @@ public class RequestTokenController {
 
 	@GetMapping
 	public ModelAndView requestToken(HttpServletRequest request) throws Exception {
-		// 아래의 return 문을 삭제하고 코드를 작성합니다. 
-		return null;
+
+		ModelAndView mav = new ModelAndView();
+		// 1. QueryString 또는 Post 파라미터 파싱
+		RequestTokenParam param = new RequestTokenParam(request);
+		// 2. tbl_oauth_key 테이블에서 ConsumerSecret 정보 읽어옴.
+		ConsumerVO consumerVO = consumerService.selectByConsumerKey(param.getConsumerKey());
+		String consumerSecret = consumerVO.getConsumerSecret();
+		// 3. signature validation!! 유효하지 않으면 예외 발생!
+		param.validateRequestToken(consumerSecret);
+		// 4. 유효하다면 RequestToken 생성하여 tbl_request_token 테이블에 저장!!
+		RequestTokenVO tokenVO = new RequestTokenVO();
+		tokenVO.setConsumerKey(consumerVO.getConsumerKey());
+		tokenVO.setCallback(param.getCallback());
+		TokenGenerator.generateRequestToken(tokenVO);
+		System.out.println("## RTO : " + tokenVO);
+		requestTokenService.createRequestToken(tokenVO);
+		String oauth_callback_confirmed = "true";
+		StringBuilder builder = new StringBuilder();
+		builder.append("oauth_token=" + tokenVO.getRequestToken() + "&");
+		builder.append("oauth_token_secret=" + tokenVO.getRequestTokenSecret() + "&");
+		builder.append("oauth_callback_confirmed=" + oauth_callback_confirmed);
+		mav.addObject("message", builder.toString());
+		mav.setViewName("request_token");
+		return mav;
 	}
 }
