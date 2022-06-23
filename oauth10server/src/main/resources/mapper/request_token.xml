@@ -24,7 +24,7 @@
 
 	<delete id="deleteExpired">
 		delete tbl_request_token 
-			where DATEDIFF(MINUTE, regdate, sysdate) > 60
+			where DATEDIFF(MINUTE, regdate, CURRENT_DATE) > 60
 	</delete>
 
 	<select id="select" parameterType="java.lang.String"
