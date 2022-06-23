@@ -6,3 +6,5 @@ apikeyserver/.mvn
 dynamic-web/target
 apikeyclient/.settings
 apikeyclient/target
+oauth10server/.mvn
+oauth10client/.mvn
