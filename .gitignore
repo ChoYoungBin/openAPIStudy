@@ -8,3 +8,5 @@ apikeyclient/.settings
 apikeyclient/target
 oauth10server/.mvn
 oauth10client/.mvn
+bitlyclient/target
+bitlyclient/.settings
