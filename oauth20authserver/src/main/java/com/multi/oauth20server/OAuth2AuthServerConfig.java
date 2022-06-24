@@ -12,6 +12,8 @@ import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.sql.DataSource;
 
@@ -24,8 +26,14 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
+    public JwtAccessTokenConverter tokenConverter(){
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey("SECRET_KEY");
+        return converter;
+    }
     public TokenStore tokenStore() {
-        return new JdbcTokenStore(dataSource);
+        //return new JdbcTokenStore(dataSource);
+        return new JwtTokenStore(tokenConverter());
     }
 
     public JdbcApprovalStore approvalStore() {
@@ -38,7 +46,9 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore()).approvalStore(approvalStore())
+        endpoints.tokenStore(tokenStore())
+                .accessTokenConverter(tokenConverter())
+                .approvalStore(approvalStore())
                 .authorizationCodeServices(authorizationCodeServices());
     }
 
