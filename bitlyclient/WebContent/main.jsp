@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Quicksand" />
 <link rel="stylesheet" type="text/css" href="css/pretty-json.css" />
 <title>URL 단축 테스트</title>
@@ -24,11 +24,11 @@
     <script type="text/javascript" src="js/backbone-min.js" ></script>
     <script type="text/javascript" src="js/pretty-json-min.js" ></script>
 	<script type="text/javascript">
-	var param = { longUrl : ""  };
+	let param = { longUrl : ""  };
 	$("#shorten").click(function() {
 		param.long_url = $("#long").val();
 		$.get("shorten.jsp", param, function(response) {
-            var node = new PrettyJSON.view.Node({ 
+            let node = new PrettyJSON.view.Node({
                 el:$("#json"), 
                 data: response
             });
