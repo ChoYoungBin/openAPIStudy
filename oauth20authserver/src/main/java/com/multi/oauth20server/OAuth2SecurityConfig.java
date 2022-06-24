@@ -25,7 +25,7 @@ public class OAuth2SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/oauth/**", "/login**")
+                .antMatchers("/oauth/**", "/login**", "/swagger-ui/**", "/webjars/**", "/v2/**", "/swagger-resources/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
